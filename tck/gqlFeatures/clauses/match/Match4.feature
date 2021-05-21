@@ -121,7 +121,7 @@ Feature: Match4 - Match variable length patterns scenarios
     Given an empty graph
     And having executed:
       """
-      INSERT (a:Artist:A), (b:Artist:B), (c:Artist:C)
+      INSERT (a:Artist&A), (b:Artist&B), (c:Artist&C)
       INSERT (a)-[:WORKED_WITH {year: 1987}]->(b),
              (b)-[:WORKED_WITH {year: 1988}]->(c)
       """
@@ -132,7 +132,7 @@ Feature: Match4 - Match variable length patterns scenarios
       """
     Then the result should be, in any order:
       | a           | b           |
-      | (:Artist:B) | (:Artist:C) |
+      | (:Artist&B) | (:Artist&C) |
     And no side effects
 
   @translated

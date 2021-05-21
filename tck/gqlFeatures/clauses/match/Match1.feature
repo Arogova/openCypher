@@ -66,19 +66,19 @@ Feature: Match1 - Match nodes
     Given an empty graph
     And having executed:
       """
-      INSERT (:A:B:C), (:A:B), (:A:C), (:B:C),
+      INSERT (:A&B&C), (:A&B), (:A&C), (:B&C),
              (:A), (:B), (:C),
-             ({name: ':A:B:C'}), ({abc: 'abc'}), ()
+             ({name: ':A&B&C'}), ({abc: 'abc'}), ()
       """
     When executing query:
       """
-      MATCH (a:A:B)
+      MATCH (a:A&B)
       RETURN a
       """
     Then the result should be, in any order:
       | a        |
-      | (:A:B)   |
-      | (:A:B:C) |
+      | (:A&B)   |
+      | (:A&B&C) |
     And no side effects
 
   @translated

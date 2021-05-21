@@ -144,18 +144,18 @@ Feature: Match3 - Match fixed length patterns
     Given an empty graph
     And having executed:
       """
-      INSERT (a:A:B:C:D:E:F:G:H:I:J:K:L:M),
-             (b:U:V:W:X:Y:Z)
+      INSERT (a:A&B&C&D&E&F&G&H&I&J&K&L&M),
+             (b:U&V&W&X&Y&Z)
       INSERT (a)-[:T]->(b)
       """
     When executing query:
       """
-      MATCH (n:A:B:C:D:E:F:G:H:I:J:K:L:M)-[:T]->(m:Z:Y:X:W:V:U)
+      MATCH (n:A&B&C&D&E&F&G&H&I&J&K&L&M)-[:T]->(m:Z&Y&X&W&V&U)
       RETURN n, m
       """
     Then the result should be, in any order:
       | n                            | m              |
-      | (:A:B:C:D:E:F:G:H:I:J:K:L:M) | (:Z:Y:X:W:V:U) |
+      | (:A&B&C&D&E&F&G&H&I&J&K&L&M) | (:Z&Y&X&W&V&U) |
     And no side effects
 
   @translated
