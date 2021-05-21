@@ -28,9 +28,9 @@
 
 #encoding: utf-8
   
-@translated
 Feature: Match4 - Match variable length patterns scenarios
 
+  @translated
   Scenario: [1] Handling fixed-length variable length pattern
     Given an empty graph
     And having executed:
@@ -47,6 +47,7 @@ Feature: Match4 - Match variable length patterns scenarios
       | [[:T]] |
     And no side effects
 
+  @translated
   Scenario: [2] Simple variable length pattern
     Given an empty graph
     And having executed:
@@ -69,6 +70,7 @@ Feature: Match4 - Match variable length patterns scenarios
       | ({name: 'D'}) |
     And no side effects
 
+  @translated
   Scenario: [3] Zero-length variable length pattern in the middle of the pattern
     Given an empty graph
     And having executed:
@@ -114,6 +116,7 @@ Feature: Match4 - Match variable length patterns scenarios
 #      | ({var: 'end'}) |
 #    And no side effects
 
+  @translated
   Scenario: [5] Matching variable length pattern with property predicate
     Given an empty graph
     And having executed:
@@ -132,6 +135,7 @@ Feature: Match4 - Match variable length patterns scenarios
       | (:Artist:B) | (:Artist:C) |
     And no side effects
 
+  @translated
   Scenario: [6] Matching variable length patterns from a bound node
     Given an empty graph
     And having executed:
@@ -151,6 +155,7 @@ Feature: Match4 - Match variable length patterns scenarios
       | [[:X], [:Y]] |
     And no side effects
 
+  @translated
   Scenario: [7] Matching variable length patterns including a bound relationship
     Given an empty graph
     And having executed:
@@ -195,7 +200,7 @@ Feature: Match4 - Match variable length patterns scenarios
 #      | (:A)  | (:C)   |
 #    And no side effects
 
-  @skipGrammarCheck
+  @skipGrammarCheck @translated
   Scenario: [9] Fail when asterisk operator is missing
     Given an empty graph
     And having executed:
@@ -238,7 +243,7 @@ Feature: Match4 - Match variable length patterns scenarios
       """
     Then a SyntaxError should be raised at compile time: InvalidRelationshipPattern
 
-  @skipGrammarCheck
+  @skipGrammarCheck @translated
   Scenario: [10] Fail on negative bound
     Given an empty graph
     And having executed:

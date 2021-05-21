@@ -30,6 +30,7 @@
 
 Feature: Match6 - Match named paths scenarios
 
+  @translated
   Scenario: [1] Zero-length named path
     Given an empty graph
     And having executed:
@@ -46,6 +47,7 @@ Feature: Match6 - Match named paths scenarios
       | <()> |
     And no side effects
 
+  @translated
   Scenario: [2] Return a simple path
     Given an empty graph
     And having executed:
@@ -63,6 +65,7 @@ Feature: Match6 - Match named paths scenarios
     And no side effects
 
 
+  @translated
   Scenario: [3] Return a three node path
     Given an empty graph
     And having executed:
@@ -79,6 +82,7 @@ Feature: Match6 - Match named paths scenarios
       | <(:A {name: 'A'})-[:KNOWS]->(:B {name: 'B'})-[:KNOWS]->(:C {name: 'C'})> |
     And no side effects
 
+  @translated
   Scenario: [4] Respecting direction when matching non-existent path
     Given an empty graph
     And having executed:
@@ -95,6 +99,7 @@ Feature: Match6 - Match named paths scenarios
       | p |
     And no side effects
 
+  @translated
   Scenario: [5] Path query should return results in written order
     Given an empty graph
     And having executed:
@@ -111,6 +116,7 @@ Feature: Match6 - Match named paths scenarios
       | <(:Label1)<-[:TYPE]-(:Label2)> |
     And no side effects
 
+  @translated
   Scenario: [6] Handling direction of named paths
     Given an empty graph
     And having executed:
@@ -127,6 +133,7 @@ Feature: Match6 - Match named paths scenarios
       | <(:B)<-[:T]-(:A)> |
     And no side effects
 
+  @translated
   Scenario: [7] Respecting direction when matching existing path
     Given an empty graph
     And having executed:
@@ -144,6 +151,7 @@ Feature: Match6 - Match named paths scenarios
       | <({name: 'a'})-[:T]->({name: 'b'})> |
     And no side effects
 
+  @translated
   Scenario: [8] Respecting direction when matching non-existent path with multiple directions
     Given an empty graph
     And having executed:
@@ -161,6 +169,7 @@ Feature: Match6 - Match named paths scenarios
       | p |
     And no side effects
 
+  @translated
   Scenario: [9] Longer path query should return results in written order
     Given an empty graph
     And having executed:
@@ -177,6 +186,7 @@ Feature: Match6 - Match named paths scenarios
       | <(:Label1)<-[:T1]-(:Label2)-[:T2]->(:Label3)> |
     And no side effects
 
+  @translated
   Scenario: [10] Named path with alternating directed/undirected relationships
     Given an empty graph
     And having executed:
@@ -195,6 +205,7 @@ Feature: Match6 - Match named paths scenarios
       | <(:C)-[:T]->(:B)-[:T]->(:A)> |
     And no side effects
 
+  @translated
   Scenario: [11] Named path with multiple alternating directed/undirected relationships
     Given an empty graph
     And having executed:
@@ -214,6 +225,7 @@ Feature: Match6 - Match named paths scenarios
       | <(:D)-[:T]->(:C)-[:T]->(:B)-[:T]->(:A)> |
     And no side effects
 
+  @translated
   Scenario: [12] Matching path with multiple bidirectional relationships
     Given an empty graph
     And having executed:
@@ -235,6 +247,7 @@ Feature: Match6 - Match named paths scenarios
       | <(:B)-[:T2]->(:A)-[:T1]->(:B)> |
     And no side effects
 
+  @translated
   Scenario: [13] Matching path with both directions should respect other directions
     Given an empty graph
     And having executed:
@@ -254,6 +267,7 @@ Feature: Match6 - Match named paths scenarios
       | <(:B)<-[:T1]-(:A)<-[:T2]-(:B)> |
     And no side effects
 
+  @translated
   Scenario: [14] Named path with undirected fixed variable length pattern
     Given an empty graph
     And having executed:
@@ -278,6 +292,7 @@ Feature: Match6 - Match named paths scenarios
       | <(:Start)<-[:CONNECTED_TO]-()-[:CONNECTED_TO]->()<-[:CONNECTED_TO]-()-[:CONNECTED_TO]->(:End)> |
     And no side effects
 
+  @translated
   Scenario: [15] Variable-length named path
     Given an empty graph
     And having executed:
@@ -294,6 +309,7 @@ Feature: Match6 - Match named paths scenarios
       | <()> |
     And no side effects
 
+  @translated
   Scenario: [16] Return a var length path
     Given an empty graph
     And having executed:
@@ -311,6 +327,7 @@ Feature: Match6 - Match named paths scenarios
       | <(:A {name: 'A'})-[:KNOWS {num: 1}]->(:B {name: 'B'})-[:KNOWS {num: 2}]->(:C {name: 'C'})> |
     And no side effects
 
+  @translated
   Scenario: [17] Return a named var length path of length zero
     Given an empty graph
     And having executed:
@@ -329,6 +346,7 @@ Feature: Match6 - Match named paths scenarios
       | <(:A {name: 'A'})-[:KNOWS]->(:B {name: 'B'})-[:FRIEND]->(:C {name: 'C'})> |
     And no side effects
 
+  @translated
   Scenario: [18] Undirected named path
     Given an empty graph
     And having executed:
@@ -347,6 +365,7 @@ Feature: Match6 - Match named paths scenarios
       | <(:Movie)<-[:T]-()> |
     And no side effects
 
+  @translated
   Scenario: [19] Variable length relationship without lower bound
     Given an empty graph
     And having executed:
@@ -367,6 +386,7 @@ Feature: Match6 - Match named paths scenarios
       | <({name: 'A'})-[:KNOWS]->({name: 'B'})-[:KNOWS]->({name: 'C'})> |
     And no side effects
 
+  @translated
   Scenario: [20] Variable length relationship without bounds
     Given an empty graph
     And having executed:
@@ -387,6 +407,7 @@ Feature: Match6 - Match named paths scenarios
       | <({name: 'A'})-[:KNOWS]->({name: 'B'})-[:KNOWS]->({name: 'C'})> |
     And no side effects
 
+  @translated
   Scenario Outline: [21] Fail when a node has the same variable in a preceding MATCH
     Given any graph
     When executing query:
@@ -414,6 +435,7 @@ Feature: Match6 - Match named paths scenarios
       | (a)-[r]-*(s)-[]-(b), (p), (t)-[]-(b)  |
       | (a)-[r]-(p)<-[]-*(b), (t), (t)-[]-(b) |
 
+  @translated
   Scenario Outline: [22] Fail when a relationship has the same variable in a preceding MATCH
     Given any graph
     When executing query:
@@ -442,6 +464,7 @@ Feature: Match6 - Match named paths scenarios
       | (a)-[r]-*(s)-[p]-(b), (t), (t)-[]-(b) |
       | (a)-[r]-(s)<-[p]-(b), (t), (t)-[]-(b) |
 
+  @translated
   Scenario Outline: [23] Fail when a node has the same variable in the same pattern
     Given any graph
     When executing query:
@@ -474,6 +497,7 @@ Feature: Match6 - Match named paths scenarios
       | (a)-[r]-(p)-[]-(b), p = (s)-[]-(t), (t), (t)-[]-(b)   |
       | (a)-[r]-(p)<-[]-*(b), p = (s)-[]-(t), (t), (t)-[]-(b) |
 
+  @translated
   Scenario Outline: [24] Fail when a relationship has the same variable in the same pattern
     Given any graph
     When executing query:

@@ -28,9 +28,9 @@
 
 #encoding: utf-8
 
-@translated
 Feature: Match2 - Match relationships
 
+  @translated
   Scenario: [1] Match non-existent relationships returns empty
     Given an empty graph
     When executing query:
@@ -42,6 +42,7 @@ Feature: Match2 - Match relationships
       | r |
     And no side effects
 
+  @translated
   Scenario: [2] Matching a relationship pattern using a label predicate on both sides
     Given an empty graph
     And having executed:
@@ -95,6 +96,7 @@ Feature: Match2 - Match relationships
 #      | 'T' |
 #    And no side effects
 
+  @translated
   Scenario: [5] Match relationship with inline property value
     Given an empty graph
     And having executed:
@@ -111,6 +113,7 @@ Feature: Match2 - Match relationships
       | (:A) |
     And no side effects
 
+  @translated
   Scenario: [6] Match relationships with multiple types
     Given an empty graph
     And having executed:
@@ -150,6 +153,7 @@ Feature: Match2 - Match relationships
 #      | a1 | r | b2 |
 #    And no side effects
 
+  @translated
   Scenario: [8] Fail when using parameter as relationship predicate in MATCH
     Given any graph
     When executing query:
@@ -159,6 +163,7 @@ Feature: Match2 - Match relationships
       """
     Then a SyntaxError should be raised at compile time: InvalidParameterUse
 
+  @translated
   Scenario Outline: [9] Fail when a node has the same variable in a preceding MATCH
     Given any graph
     When executing query:
@@ -198,6 +203,7 @@ Feature: Match2 - Match relationships
       | (s), (a)-[q]-(b), (r), (s)-[]->(t)<-[]-(b) |
       | (s), (a)-[q]-(b), (t), (s)-[]->(r)<-[]-(b) |
 
+  @translated
   Scenario Outline: [10] Fail when a path has the same variable in a preceding MATCH
     Given any graph
     When executing query:
@@ -230,6 +236,7 @@ Feature: Match2 - Match relationships
       | (x), (a)-[q]-*(b), r = (s)-[p]->(t)<-[]-(b) |
       | (x), (a)-[q]-(b), r = (s)-[p]->*(t)<-[]-(b) |
 
+  @translated
   Scenario Outline: [11] Fail when a node has the same variable in the same pattern
     Given any graph
     When executing query:
@@ -259,6 +266,7 @@ Feature: Match2 - Match relationships
       | (r), (a)-[q]-(b), (s), (s)-[r]-(t)-[]-(b)   |
       | (r), (a)-[q]-(b), (s), (s)-[r]->(t)<-[]-(b) |
 
+  @translated
   Scenario Outline: [12] Fail when a path has the same variable in the same pattern
     Given any graph
     When executing query:
@@ -279,6 +287,7 @@ Feature: Match2 - Match relationships
       | (a)-[p]-(s)-[]-(b), r = (s)-[]-*(t), (t), (t)-[r]-(b)  |
       | (a)-[p]-(s)-[]-(b), r = (s)-[]-*(t), (t), (t)-[r]-*(b) |
 
+  @translated
   Scenario Outline: [13] Fail when matching a relationship variable bound to a value
     Given any graph
     When executing query:
