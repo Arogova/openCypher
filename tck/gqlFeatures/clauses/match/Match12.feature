@@ -60,12 +60,12 @@ Feature: Match12 - Match quantified path patterns
       RETURN x.name AS x, y.name AS y
       """
     Then the result should be, in any order:
-      | x | y |
-      | A | A |
-      | B | B |
-      | C | C |
-      | A | B |
-      | B | C |
+      | x   | y   |
+      | 'A' | 'A' |
+      | 'B' | 'B' |
+      | 'C' | 'C' |
+      | 'A' | 'B' |
+      | 'B' | 'C' |
     And no side effects
 
   @new
@@ -81,15 +81,15 @@ Feature: Match12 - Match quantified path patterns
       RETURN x.name AS x, y.name AS y, z.name AS z
       """
     Then the result should be, in any order:
-      | x | y | z |
-      | A | A | A |
-      | B | B | B |
-      | C | C | C |
-      | A | A | B |
-      | A | B | B |
-      | B | B | C |
-      | B | C | C |
-      | A | B | C |
+      | x   | y   | z   |
+      | 'A' | 'A' | 'A' |
+      | 'B' | 'B' | 'B' |
+      | 'C' | 'C' | 'C' |
+      | 'A' | 'A' | 'B' |
+      | 'A' | 'B' | 'B' |
+      | 'B' | 'B' | 'C' |
+      | 'B' | 'C' | 'C' |
+      | 'A' | 'B' | 'C' |
 
     And no side effects
 
@@ -106,18 +106,18 @@ Feature: Match12 - Match quantified path patterns
       RETURN x.name AS x, y.name AS y, z.name AS z
       """
     Then the result should be, in any order:
-        | x | y    | z |
-        | A | null | A |
-        | B | null | B |
-        | C | null | C |
-        | A | A    | A |
-        | B | B    | B |
-        | C | C    | C |
-        | A | A    | B |
-        | A | B    | B |
-        | B | B    | C |
-        | B | C    | C |
-        | A | B    | C |
+        | x   | y    | z   |
+        | 'A' | null | 'A' |
+        | 'B' | null | 'B' |
+        | 'C' | null | 'C' |
+        | 'A' | 'A'  | 'A' |
+        | 'B' | 'B'  | 'B' |
+        | 'C' | 'C'  | 'C' |
+        | 'A' | 'A'  | 'B' |
+        | 'A' | 'B'  | 'B' |
+        | 'B' | 'B'  | 'C' |
+        | 'B' | 'C'  | 'C' |
+        | 'A' | 'B'  | 'C' |
 
     And no side effects
 
@@ -134,12 +134,12 @@ Feature: Match12 - Match quantified path patterns
       RETURN x.name AS x, y1.name AS y1, y2.name AS y2, z.name AS z
       """
     Then the result should be, in any order:
-      | x | y1   | y2   | z |
-      | A | null | null | A |
-      | B | null | null | B |
-      | C | null | null | C |
-      | D | null | null | D |
-      | A | B    | C    | D |
+      | x   | y1   | y2   | z   |
+      | 'A' | null | null | 'A' |
+      | 'B' | null | null | 'B' |
+      | 'C' | null | null | 'C' |
+      | 'D' | null | null | 'D' |
+      | 'A' | 'B'  | 'C'  | 'D' |
 
     And no side effects
 
@@ -156,15 +156,15 @@ Feature: Match12 - Match quantified path patterns
         RETURN x.name AS x, y.name AS y, z.name AS z
         """
     Then the result should be, in any order:
-      | x | y | z |
-      | A | B | B |
-      | A | B | C |
-      | A | C | C |
-      | A | C | D |
-      | B | C | C |
-      | B | C | D |
-      | B | D | D |
-      | C | D | D |
+      | x   | y   | z   |
+      | 'A' | 'B' | 'B' |
+      | 'A' | 'B' | 'C' |
+      | 'A' | 'C' | 'C' |
+      | 'A' | 'C' | 'D' |
+      | 'B' | 'C' | 'C' |
+      | 'B' | 'C' | 'D' |
+      | 'B' | 'D' | 'D' |
+      | 'C' | 'D' | 'D' |
 
     And no side effects
 
@@ -181,15 +181,15 @@ Feature: Match12 - Match quantified path patterns
         RETURN x.name AS x, y.name AS y, z.name AS z
         """
     Then the result should be, in any order:
-      | x | y | z |
-      | A | A | B |
-      | A | A | C |
-      | A | B | C |
-      | A | B | D |
-      | B | B | C |
-      | B | B | D |
-      | B | C | D |
-      | C | C | D |
+      | x   | y   | z   |
+      | 'A' | 'A' | 'B' |
+      | 'A' | 'A' | 'C' |
+      | 'A' | 'B' | 'C' |
+      | 'A' | 'B' | 'D' |
+      | 'B' | 'B' | 'C' |
+      | 'B' | 'B' | 'D' |
+      | 'B' | 'C' | 'D' |
+      | 'C' | 'C' | 'D' |
     And no side effects
 
   @new
@@ -205,14 +205,14 @@ Feature: Match12 - Match quantified path patterns
         RETURN x.name AS x, y.name AS y, z.name AS z
         """
     Then the result should be, in any order:
-      | x | y    | z |
-      | A | null | A |
-      | B | null | B |
-      | C | null | C |
-      | D | null | D |
-      | A | B    | C |
-      | A | C    | D |
-      | B | C    | D |
+      | x   | y    | z   |
+      | 'A' | null | 'A' |
+      | 'B' | null | 'B' |
+      | 'C' | null | 'C' |
+      | 'D' | null | 'D' |
+      | 'A' | 'B'  | 'C' |
+      | 'A' | 'C'  | 'D' |
+      | 'B' | 'C'  | 'D' |
     And no side effects
 
   @new
@@ -228,14 +228,14 @@ Feature: Match12 - Match quantified path patterns
         RETURN x.name AS x, y.name AS y, z.name AS z
         """
     Then the result should be, in any order:
-      | x | y     | z |
-      | A | [A]   | B |
-      | B | [B]   | C |
-      | C | [C]   | D |
-      | A | [B]   | C |
-      | B | [C]   | D |
-      | A | [A,B] | C |
-      | B | [B,C] | D |
-      | A | [A,C] | D |
-      | A | [B,C] | D |
+      | x   | y         | z   |
+      | 'A' | ['A']     | 'B' |
+      | 'B' | ['B']     | 'C' |
+      | 'C' | ['C']     | 'D' |
+      | 'A' | ['B']     | 'C' |
+      | 'B' | ['C']     | 'D' |
+      | 'A' | ['A','B'] | 'C' |
+      | 'B' | ['B','C'] | 'D' |
+      | 'A' | ['A','C'] | 'D' |
+      | 'A' | ['B','C'] | 'D' |
     And no side effects
