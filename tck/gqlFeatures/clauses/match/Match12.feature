@@ -239,3 +239,172 @@ Feature: Match12 - Match quantified path patterns
       | 'A' | ['A','C'] | 'D' |
       | 'A' | ['B','C'] | 'D' |
     And no side effects
+
+  @new
+  Scenario: [10] Check questioned - {0,1} quantified equivalence
+    Given an empty graph
+    And having executed:
+    """
+      INSERT (a:A {name: 'A'})-[:KNOWS]->(b:B {name: 'B'})-[:KNOWS]->(c:C {name: 'C'})
+    """
+    When executing query:
+    """
+      CALL {
+          MATCH p = (x)-[:KNOWS]->?(y)
+          WITH p ORDER BY p
+          RETURN collect(p) AS questioned1
+      }
+      CALL {
+          MATCH p = (x)(-[:KNOWS]->?)?(y)
+          WITH p ORDER BY p
+          RETURN collect(p) AS questioned2
+      }
+      CALL {
+          MATCH p = (x)((-[:KNOWS]->?)?)?(y)
+          WITH p ORDER BY p
+          RETURN collect(p) AS questioned3
+      }
+      CALL {
+          MATCH p = (x)-[:KNOWS]->{0,1}(y)
+          WITH q ORDER BY q
+          RETURN collect(q) AS quantified
+      }
+      RETURN questioned1 = quantified, questioned2 = quantified, questioned3 = quantified AS result1, result2, result3
+    """
+    Then the result should be, in any order:
+      | result1 | result2 | result3 |
+      | true    | true    | true    |
+    And no side effects
+
+  @new
+  Scenario: [11] Check questioned - {0,n} quantified equivalence
+    Given an empty graph
+    And having executed:
+    """
+      INSERT (a:A {name: 'A'})-[:KNOWS]->(b:B {name: 'B'})-[:KNOWS]->(c:C {name: 'C'})-[:KNOWS]->(d:D {name:'D'})
+    """
+    When executing query:
+    """
+      CALL {
+          MATCH p = (x)-[:KNOWS]->?(y)-[:KNOWS]->?(z)
+          WITH p ORDER BY p
+          RETURN collect(p) AS questioned1
+      }
+      CALL {
+          MATCH p = (x)-[:KNOWS]->{0,2}(y)
+          WITH q ORDER BY q
+          RETURN collect(q) AS quantified1
+      }
+      CALL {
+          MATCH p = (x)-[:KNOWS]->?(y1)-[:KNOWS]->?(y2)-[:KNOWS]->?(z)
+          WITH p ORDER BY p
+          RETURN collect(p) AS questioned2
+      }
+      CALL {
+          MATCH p = (x)-[:KNOWS]->{0,3}(y)
+          WITH q ORDER BY q
+          RETURN collect(q) AS quantified2
+      }
+      RETURN questioned1 = quantified1, questioned2 = quantified2 AS result1, result2
+    """
+    Then the result should be, in any order:
+      | result1 | result2 |
+      | true    | true    |
+    And no side effects
+
+  @new
+  Scenario: [12] Check questioned - {n,m} quantified equivalence
+    Given an empty graph
+    And having executed:
+    """
+      INSERT (a:A {name: 'A'})-[:KNOWS]->(b:B {name: 'B'})-[:KNOWS]->(c:C {name: 'C'})-[:KNOWS]->(d:D {name:'D'})
+    """
+    When executing query:
+    """
+      CALL {
+          MATCH p = (x)-[:KNOWS]->(y)-[:KNOWS]->?(z)
+          WITH p ORDER BY p
+          RETURN collect(p) AS questioned1
+      }
+      CALL {
+          MATCH p = (x)-[:KNOWS]->{1,2}(y)
+          WITH q ORDER BY q
+          RETURN collect(q) AS quantified1
+      }
+      CALL {
+          MATCH p = (x)-[:KNOWS]->(y1)-[:KNOWS]->?(y2)-[:KNOWS]->?(z)
+          WITH p ORDER BY p
+          RETURN collect(p) AS questioned2
+      }
+      CALL {
+          MATCH p = (x)-[:KNOWS]->{1,3}(y)
+          WITH q ORDER BY q
+          RETURN collect(q) AS quantified2
+      }
+      CALL {
+          MATCH p = (x)-[:KNOWS]->(y1)-[:KNOWS]->(y2)-[:KNOWS]->?(z)
+          WITH p ORDER BY p
+          RETURN collect(p) AS questioned3
+      }
+      CALL {
+          MATCH p = (x)-[:KNOWS]->{2,3}(y)
+          WITH q ORDER BY q
+          RETURN collect(q) AS quantified3
+      }
+      RETURN questioned1 = quantified1, questioned2 = quantified2, questioned3 = quantified3 AS result1, result2, result3
+    """
+    Then the result should be, in any order:
+      | result1 | result2 | result3 |
+      | true    | true    | true    |
+    And no side effects
+
+  @new
+  Scenario: [13] Check questioned path position equivalence
+    Given an empty graph
+    And having executed:
+    """
+      INSERT (a:A {name: 'A'})-[:KNOWS]->(b:B {name: 'B'})-[:KNOWS]->(c:C {name: 'C'})-[:KNOWS]->(d:D {name:'D'})
+    """
+    When executing query:
+    """
+      CALL {
+          MATCH p = (x)-[:KNOWS]->{0,1}(y)-[:KNOWS]->?(z)
+          WITH p ORDER BY p
+          RETURN collect(p) AS questioned1
+      }
+      CALL {
+          MATCH p = (x)-[:KNOWS]->?(y)-[:KNOWS]->{0,1}(z)
+          WITH q ORDER BY q
+          RETURN collect(q) AS questioned2
+      }
+      CALL {
+          MATCH p = (x)-[:KNOWS]->(y)-[:KNOWS]->?(z)
+          WITH p ORDER BY p
+          RETURN collect(p) AS questioned3
+      }
+      CALL {
+          MATCH p = (x)-[:KNOWS]->?(y)-[:KNOWS]->(z)
+          WITH q ORDER BY q
+          RETURN collect(q) AS questioned4
+      }
+      CALL {
+          MATCH p = (x)-[:KNOWS]->?(y1)-[:KNOWS]->?(y2)-[:KNOWS]->(z)
+          WITH p ORDER BY p
+          RETURN collect(p) AS questioned5
+      }
+      CALL {
+          MATCH p = (x)-[:KNOWS]->(y1)-[:KNOWS]->?(y2)-[:KNOWS]->?(z)
+          WITH q ORDER BY q
+          RETURN collect(q) AS questioned6
+      }
+      CALL {
+          MATCH p = (x)-[:KNOWS]->?(y1)-[:KNOWS]->(y2)-[:KNOWS]->?(z)
+          WITH q ORDER BY q
+          RETURN collect(q) AS questioned7
+      }
+      RETURN questioned1 = questioned2, questioned3 = questioned4, questioned5 = questioned6, questioned5 = questioned7 AS result1, result2, result3, result4
+    """
+    Then the result should be, in any order:
+      | result1 | result2 | result3 | result4 |
+      | true    | true    | true    | true    |
+    And no side effects
