@@ -110,13 +110,6 @@ Feature: Match12 - Match quantified path patterns
         | 'A' | null | 'A' |
         | 'B' | null | 'B' |
         | 'C' | null | 'C' |
-        | 'A' | 'A'  | 'A' |
-        | 'B' | 'B'  | 'B' |
-        | 'C' | 'C'  | 'C' |
-        | 'A' | 'A'  | 'B' |
-        | 'A' | 'B'  | 'B' |
-        | 'B' | 'B'  | 'C' |
-        | 'B' | 'C'  | 'C' |
         | 'A' | 'B'  | 'C' |
 
     And no side effects
