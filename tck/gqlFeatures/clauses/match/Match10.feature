@@ -172,6 +172,7 @@ Feature: Match10 - Match label expressions
       | (:C)      |
       | (:A&B)    |
       | (:A&C)    |
+      | (:B&C)    |
       | (:A&B&C)  |
     And no side effects
 
