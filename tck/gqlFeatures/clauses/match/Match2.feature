@@ -62,39 +62,39 @@ Feature: Match2 - Match relationships
       | [:T1] |
     And no side effects
 
-#  Scenario: [3] Matching a self-loop with an undirected relationship pattern
-#    Given an empty graph
-#    And having executed:
-#      """
-#      INSERT (a)
-#      INSERT (a)-[:T]->(a)
-#      """
-#    When executing query:
-#      """
-#      MATCH ()-[r]-()
-#      RETURN type(r) AS r
-#      """
-#    Then the result should be, in any order:
-#      | r   |
-#      | 'T' |
-#    And no side effects
+  Scenario: [3] Matching a self-loop with an undirected relationship pattern
+    Given an empty graph
+    And having executed:
+      """
+      INSERT (a)
+      INSERT (a)-[:T {name:'T'}]->(a)
+      """
+    When executing query:
+      """
+      MATCH ()-[r]-()
+      RETURN r.name AS r
+      """
+    Then the result should be, in any order:
+      | r   |
+      | 'T' |
+    And no side effects
 
-#  Scenario: [4] Matching a self-loop with a directed relationship pattern
-#    Given an empty graph
-#    And having executed:
-#      """
-#      INSERT (a)
-#      INSERT (a)-[:T]->(a)
-#      """
-#    When executing query:
-#      """
-#      MATCH ()-[r]->()
-#      RETURN type(r) AS r
-#      """
-#    Then the result should be, in any order:
-#      | r   |
-#      | 'T' |
-#    And no side effects
+  Scenario: [4] Matching a self-loop with a directed relationship pattern
+    Given an empty graph
+    And having executed:
+      """
+      INSERT (a)
+      INSERT (a)-[:T {name:'T'}]->(a)
+      """
+    When executing query:
+      """
+      MATCH ()-[r]->()
+      RETURN r.name AS r
+      """
+    Then the result should be, in any order:
+      | r   |
+      | 'T' |
+    And no side effects
 
   @translated
   Scenario: [5] Match relationship with inline property value
